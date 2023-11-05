@@ -1,4 +1,4 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import CreatedFunction from './CreatedFunction.jsx';
 import FunctionList from "./FunctionList";
 import Checkbox from "./Checkbox.jsx";
@@ -16,6 +16,7 @@ export default function(props){
     let [expression, setExpression] = useState('');
     let [isPolar, setPolar] = useState(false);
     let [color, setColor] = useState('#FF0000');
+    let [scale, setScale] = useState(50);
 
     let [error, setError] = useState(false);
 
@@ -110,6 +111,18 @@ export default function(props){
         graph.deleteFunction(id);
     }
     
+    function handleScaleEnter(e){
+
+        if(e.code !== 'Enter' || scale < 5 || scale > 250) return;
+
+
+        graph.setGraphScale(scale);
+    }
+
+    function handleScaleChange(e){    
+        let value = +e.target.value;
+        setScale(value);
+    }
 
     return (
         <div ref={modalWindow} className="modal" style={{left: position.x + 'px', top: position.y + 'px'}}>
@@ -119,7 +132,7 @@ export default function(props){
 
             <div className="block">
                 <input type="text" className={"function" + (error? ' error': '')} placeholder="Введите выражение" maxLength={30} onInput={handleInput} value={expression}/><br/>
-                <Settings isPolar={isPolar} color={color} handleCheckboxChange={(e) => setPolar(!(e.target.value === 'true'))} handleColorChange={(e) => setColor(e.target.value)}/>       
+                <Settings isPolar={isPolar} color={color} scale={scale || ''} handleScaleChange={handleScaleChange} handleScaleEnter={handleScaleEnter} handleCheckboxChange={(e) => setPolar(!(e.target.value === 'true'))} handleColorChange={(e) => setColor(e.target.value)}/>       
             </div>
             
             <input type="submit" className="confirm" value="Подтвердить" onClick={handleSubmit}/>

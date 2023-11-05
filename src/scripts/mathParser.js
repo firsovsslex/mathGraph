@@ -1,4 +1,4 @@
-import {log, pow, gamma} from "mathjs";
+import {log, pow, gamma, tan, divide, sin, cos, cot, sinh, cosh, tanh, coth} from "mathjs";
 
 class MathNumber{
     constructor(number){
@@ -28,16 +28,20 @@ function parse(expression, params){
     const numbers = '0123456789';
 
     const functions = {
-        'sin': (x) => Math.sin(x),
-        'cos': (x) => Math.cos(x),
+        'sin': (x) => sin(x),
+        'cos': (x) => cos(x),
         'ln': (x) => Math.log(x),
         'log': (a, x) => log(x, a),
-        'tan': (x) => Math.sin(x) / Math.cos(x),
-        'cot': (x) => Math.cos(x) / Math.sin(x),
-        'gamma': (x) => gamma(x)
+        'tan': (x) => tan(x),
+        'cot': (x) => cot(x),
+        'gamma': (x) => gamma(x),
+        'sinh': (x) => sinh(x),
+        'cosh': (x) => cosh(x),
+        'tanh': (x) => tanh(x),
+        'coth': (x) => coth(x),
     }
 
-    let funcs = Object.keys(functions);
+    let funcs = Object.keys(functions).sort((a, b) => b.length - a.length);
 
     params.E = Math.E;
     params.P = Math.PI;
@@ -226,7 +230,7 @@ function parse(expression, params){
             case '+': return a + b;
             case '-': return a - b;
             case '*': return a * b;
-            case '/': return a / b;
+            case '/': return divide(a, b);
             case '^': return pow(a, b);
         }
     }
@@ -239,7 +243,11 @@ let mathParser = {
     MathExpression
 };
 
+// let start = performance.now();
 
+// console.log('value ' + (log(73, Math.E)));
+
+// console.log(performance.now() - start);
 
 // console.log(parser.parse('cos(51)^2 + sin(51)^2 + ln(e) ', {p: Math.PI, e: Math.E}));
 // console.log(mathParser.parse('cos(x) + sin(2x)', {x: 5}))

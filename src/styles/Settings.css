@@ -1,0 +1,13 @@
+.settings__block1{
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.scale{
+    font-size: 20px;
+    width: 20%;
+
+    margin: 0 10px;
+}

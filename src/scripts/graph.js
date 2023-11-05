@@ -13,6 +13,9 @@ class Graph{
         this.offsetX = this.width / 2;
         this.offsetY = this.height / 2;
 
+        this.defaultNumberOffsetX = -15;
+        this.defaultNumberOffsetY = -10;
+
         this.ctx.lineJoin = "round";
         this.ctx.lineCap = "round";
 
@@ -22,12 +25,9 @@ class Graph{
 
     init(){
         this.drawAxis();
-        this.drawGrid(-20, -10);
+        this.drawGrid(this.defaultNumberOffsetX * this.scale / 50, this.defaultNumberOffsetY * this.scale / 50);
     }
 
-    setScale(scale){
-        this.scale = scale;
-    }
     
     drawAxis(){
        
@@ -94,7 +94,7 @@ class Graph{
 
         this.drawLines(directions, this.scale, this.height, (posY, num) => {
             this.drawLine(0, posY, this.width, posY);
-            this.ctx.fillText((-num).toString(), this.width / 2 - 20, posY + numOffsetY);
+            this.ctx.fillText((-num).toString(), this.width / 2 + numOffsetX, posY + numOffsetY);
         });
 
         this.ctx.stroke();
@@ -188,6 +188,11 @@ class Graph{
 
     setFunctionType(id, isPolar){
         this.paths.get(id).isPolar = isPolar;
+        this.updateGraph();
+    }
+
+    setGraphScale(scale){
+        this.scale = scale;
         this.updateGraph();
     }
 
