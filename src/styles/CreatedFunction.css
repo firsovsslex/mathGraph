@@ -1,0 +1,56 @@
+
+
+.main{
+    width: 100%;
+
+    padding: 10px;
+    margin: 10px 0;
+
+    font-size: 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-evenly;
+
+
+    background-color: white;
+}
+
+.delete{
+
+    outline: none;
+    border: none;
+
+    width: 32px;
+    height: 32px;
+
+    margin: 10px;
+
+    background-image: url("../images/trash.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+
+    background-size: cover;
+
+    background-color: transparent;
+
+    cursor: pointer;
+
+}
+
+/* 
+.exp-container{
+    display: flex;
+
+    align-items: center;
+    margin-bottom: 15px;
+} */
+
+.expression{
+
+    text-align: center;
+
+    color: blue;
+    font-size: 25px;
+}
