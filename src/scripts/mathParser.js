@@ -1,4 +1,4 @@
-import {log, pow, gamma, tan, divide, sin, cos, cot, sinh, cosh, tanh, coth} from "mathjs";
+import {log, pow, gamma, tan, divide, sin, cos, cot, sinh, cosh, tanh, coth, sqrt, cbrt, acos, sec, csc, asin, acot, atan, asinh, atanh, acosh, acoth, asech, acsch, asec, acsc} from "mathjs";
 
 class MathNumber{
     constructor(number){
@@ -34,11 +34,28 @@ function parse(expression, params){
         'log': (a, x) => log(x, a),
         'tan': (x) => tan(x),
         'cot': (x) => cot(x),
+        'sec': (x) => sec(x),
+        'csc': (x) => csc(x),
         'gamma': (x) => gamma(x),
         'sinh': (x) => sinh(x),
         'cosh': (x) => cosh(x),
         'tanh': (x) => tanh(x),
         'coth': (x) => coth(x),
+        'sqrt': (x) => sqrt(x),
+        'cbrt': (x) => cbrt(x),
+        'asin': (x) => asin(x),
+        'acos': (x) => acos(x),
+        'atan': (x) => atan(x),
+        'acot': (x) => acot(x),
+        'asec': (x) => asec(x),
+        'acsc': (x) => acsc(x),
+        'asinh': (x) => asinh(x),
+        'acosh': (x) => acosh(x),
+        'atanh': (x) => atanh(x),
+        'acoth': (x) => acoth(x),
+        'asech': (x) => asech(x),
+        'acsch': (x) => acsch(x)
+
     }
 
     let funcs = Object.keys(functions).sort((a, b) => b.length - a.length);
@@ -252,6 +269,7 @@ let mathParser = {
 // console.log(parser.parse('cos(51)^2 + sin(51)^2 + ln(e) ', {p: Math.PI, e: Math.E}));
 // console.log(mathParser.parse('cos(x) + sin(2x)', {x: 5}))
 // console.log(mathParser.parse('-x^2', {x: 2}))
+
 
 
 

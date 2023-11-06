@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 import CreatedFunction from './CreatedFunction.jsx';
 import FunctionList from "./FunctionList";
-import Checkbox from "./Checkbox.jsx";
 import Settings from "./Settings.jsx";
 
 import "../styles/ModalWindow.css";
@@ -44,7 +43,7 @@ export default function(props){
         return position;
     }
         
-    function handleMouseMove(e){
+    function handlePointerMove(e){
         let rect = windowRect.current;
 
         let position = {
@@ -55,15 +54,17 @@ export default function(props){
         setPosition(handlePosition(position, rect));
     }
 
-    function handleMouseUp(){
-        document.removeEventListener('mouseup', handleMouseUp);
-        document.removeEventListener('mousemove', handleMouseMove);
+    function handlePointerUp(e){
+        document.removeEventListener('pointerup', handlePointerUp);
+        document.removeEventListener('pointermove', handlePointerMove);
+
+        console.log(e.type)
 
     }
 
     function handleMouseDown(e){
-        document.addEventListener('mouseup', handleMouseUp);
-        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('pointerup', handlePointerUp);
+        document.addEventListener('pointermove', handlePointerMove);
 
         let rect = modalWindow.current.getBoundingClientRect();
 
@@ -126,7 +127,9 @@ export default function(props){
 
     return (
         <div ref={modalWindow} className="modal" style={{left: position.x + 'px', top: position.y + 'px'}}>
-            <div className="hook" onMouseDown={handleMouseDown}></div>
+            <div className="hook" onPointerDown={handleMouseDown} onContextMenu={(e) => {
+                e.preventDefault();
+            }}></div>
  
             <FunctionList>{savedFunctions.map((props, i) => <CreatedFunction key={props.id} handleButtonClick={() => handleButtonClick(i, props.id)} {...props}/>)}</FunctionList>
 

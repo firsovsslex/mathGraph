@@ -15,7 +15,6 @@
 
     background-color: rgb(228, 228, 228);
 
-    user-select: none;
 }
 
 .hook{
@@ -23,6 +22,7 @@
     width: 100%;
     
     cursor: pointer;
+    user-select: none;
 }
 
 .function{
