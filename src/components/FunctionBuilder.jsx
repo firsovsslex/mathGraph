@@ -116,7 +116,6 @@ export default function(props){
 
         if(e.code !== 'Enter' || scale < 5 || scale > 250) return;
 
-
         graph.setGraphScale(scale);
     }
 
